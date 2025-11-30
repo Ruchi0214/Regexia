@@ -1,0 +1,1 @@
+{ "name": "Exaggeration", "patterns": ["\\b(always|never|100%|guaranteed|best)\\b"] } 
