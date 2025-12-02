@@ -1,62 +1,214 @@
-🔍 Regexia — Real-Time Linguistic Intelligence Engine
-Bias Detection • Pattern Extraction • Explainable NLP • Real-Time Text Analysis
+# 🔍 Regexia — Real-Time Linguistic Pattern Intelligence Engine  
+### *Transparent. Explainable. Offline-Capable. Open-Source.*
 
-Regexia is a next-generation linguistic analysis engine designed to detect manipulation patterns, political rhetoric, emotional triggers, and AI-generated persuasion signals in large-scale textual streams.
+Regexia is a next-generation linguistic intelligence engine designed to detect **bias, manipulation, misinformation patterns**, and **AI-generated linguistic artefacts** inside political speeches, tweets, news articles, and long-form text.
 
-Built with regex-driven precision and parallel text processing, Regexia offers:
+It combines:
 
-🟦 Transparent
-🟩 Explainable
-🟧 Real-Time
-pattern-scanning for tweets, speeches, news articles, and long-form political text.
-🚀 Why Regexia Exists
+- ⚡ High-speed parallel regex scanning  
+- 🧠 AI-aligned explainability  
+- 👁️ Real-time linguistic pattern visualisation  
+- 📦 Plug-and-play pattern libraries (JSON rule packs)  
+- 🖥️ Full interactive dashboard built on Streamlit  
+- 🗄️ SQLite database support  
+- 🔍 CLI-style command simulation  
+- 🧩 Text chunking + pattern scoring engine  
 
-In a world where:
+---
 
-misinformation travels faster than truth
+## 🎯 Problem Statement  
+In a world drowned in **AI-generated content**, **misinformation**, and **manipulated political narratives**, it has become increasingly difficult to determine:
 
-political rhetoric is algorithmically engineered
+- What content is genuine?
+- What text contains hidden emotional manipulation?
+- Which speeches use repeated rhetorical strategies?
+- Are political messages coherent or contradictory?
+- Are statistics, claims, and attacks artificially inflated?
 
-AI-generated propaganda floods social platforms
+Traditional fact-checking tools are:
 
-and traditional fact-checkers react after the damage is done
+❌ Slow  
+❌ Mostly manual  
+❌ Not explainable  
+❌ Not transparent  
+❌ Not real-time  
 
-Regexia aims to answer one question:
+Regexia solves this.
 
-“Can we detect linguistic manipulation before it spreads?”
+---
 
-The system identifies deeper structures:
+## 💡 Proposed Solution  
 
-Fear amplification
+Regexia provides a **transparent, explainable, regex-driven linguistic scanning engine** that can detect:
 
-Emotional provocation
+- Emotional triggers  
+- Exaggeration patterns  
+- Self-promotion cues  
+- Attacks and adversarial phrases  
+- Repeated rhetoric  
+- Statistical manipulation  
+- Hidden linguistic structures used in propaganda  
 
-Repetitive persuasion loops
+### The system supports:
 
-Exaggerated claims
+- **Parallel text processing** (multi-core scanning)  
+- **Real-time explainability view** (highlighted text)  
+- **Interactive dashboard** (graphs, pattern counts, score distribution)  
+- **Exportable reports (CSV + SQLite database)**  
+- **Pattern library plugins (researchers can add rule-packs)**  
+- **Command-line inspired UI**, such as:  
 
-Contradictory statements
+regexia scan --file speeches.csv --column text --emotional --attack
 
-Synthetic or AI-generated patterns
 
-And presents results in a high-clarity visual dashboard.
+---
 
-🧠 Key Features
-🎯 1. Pattern Library (JSON-Driven)
+## 🧪 Student Research Table (Required for Internship Submission)
 
-Extendable regex packs that detect:
+| Student Name | Text Source Title | Text Type | Problem I Want to Solve | Why It Matters | My Method | What I Measure | Expected Output | File Path / URL | Where I Save Results |
+|--------------|------------------|----------|--------------------------|----------------|------------|----------------|----------------|------------------|------------------------|
+| Ruchika | Political Speech Dataset | Text Documents | Detect hidden linguistic patterns and bias in political text using regex + parallel processing | Understand how language influences perception; learn pattern recognition | Regex-driven scanning, pattern libraries, chunking, multiprocessing | Pattern frequency, emotional density, manipulation cues | Interactive dashboard, graphs, CSV report | `/projects/regexia/input/speech_dataset.txt` | `/projects/regexia/output/analysis_report.csv` |
 
-Emotional rhetoric
+---
 
-Exaggerated claims
+## 🚀 Features
 
-Statistical persuasion
+### 1. **Pattern Library (JSON Rule Packs)**
+Load multiple patterns such as:
+- Political rhetoric  
+- Emotional intensity words  
+- Logical fallacies  
+- Corporate influence patterns  
+- Climate discourse framing  
+…and more.
 
-Attacks and smears
+Researchers can contribute new libraries.
 
-Self-promotion patterns
+---
 
-Repetition and propaganda loops
+### 2. **Explainability View**
+Regexia highlights the exact words that triggered detection using `<mark>` colouring.
 
-Researchers can add new packs:
-/patterns/climate.json, /patterns/corporate.json, etc.
+Example:
+
+> The **<mark>crisis</mark>** is worsening because **<mark>they</mark>** are **<mark>corrupt</mark>**.
+
+---
+
+### 3. **Command-Line Mode (Simulated UI)**
+Users can preview commands like:
+regexia scan --file speeches.csv --column text --exaggeration --selfpromote
+
+---
+
+### 4. **Parallel Processing Engine**
+Regexia uses multiprocessing to scan **thousands of text chunks per second**, ensuring real-time performance.
+
+---
+
+### 5. **Interactive Visual Dashboard**
+Includes:
+
+- Score distribution histogram  
+- Rule hit frequency graphs  
+- Highest-scoring biased texts  
+- Highlighted explanations  
+- Downloadable CSV summaries  
+
+---
+
+### 6. **SQLite Database Support**
+Save results to a local database for long-term research or integration.
+regexia_results.db
+
+
+---
+
+# 🌍 Deployment & Access
+
+Regexia is deployed to a live environment for evaluation and demonstration.  
+This allows reviewers, mentors, and stakeholders to test the system without manual installation.
+
+### 🔗 Live Application URL  
+👉 **http://3.151.245.227:8501**
+
+*(Runs on HTTP since the project does not use a custom domain. Fully functional.)*
+
+---
+
+## 💻 Deployment Architecture (AWS EC2)
+
+Regexia is deployed using:
+
+- Ubuntu 22.04 EC2 instance  
+- Python 3 virtual environment  
+- Streamlit  
+- Open ports:  
+  - **80** for HTTP  
+  - **8501** for Streamlit  
+
+---
+
+## ⚙️ Server Setup Commands (Copy & Paste)
+
+```bash
+sudo apt update && sudo apt install -y python3-pip python3-venv nginx git
+git clone https://github.com/Ruchi0214/Regexia.git
+cd Regexia
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+streamlit run regexia_app.py --server.port=8501 --server.address=0.0.0.0
+```
+## 🛠️ Systemd Auto-Restart Setup
+Create service file:
+sudo nano /etc/systemd/system/regexia.service
+
+```[Unit]
+Description=Regexia Streamlit App
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Regexia
+ExecStart=/home/ubuntu/Regexia/venv/bin/streamlit run regexia_app.py --server.port=8501 --server.address=0.0.0.0
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+## Enable:
+
+sudo systemctl daemon-reload
+sudo systemctl enable regexia.service
+sudo systemctl start regexia.service
+
+## 🧰 Installation (For Local System)
+git clone https://github.com/Ruchi0214/Regexia.git
+cd Regexia
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+streamlit run regexia_app.py
+
+## 📦 Requirements
+streamlit
+pandas
+matplotlib
+regex
+numpy
+sqlite3
+json
+
+📊 Sample Output
+
+
+## 🧠 Why Regexia Matters
+Regexia brings:
+
+Transparency
+Explainability
+Speed
+Scalability
+Open-source ethics
+It empowers journalists, researchers, analysts, and policy groups to understand how language shapes public opinion.
