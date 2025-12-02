@@ -70,6 +70,70 @@ regexia scan --file speeches.csv --column text --emotional --attack
 | Ruchika | Political Speech Dataset | Text Documents | Detect hidden linguistic patterns and bias in political text using regex + parallel processing | Understand how language influences perception; learn pattern recognition | Regex-driven scanning, pattern libraries, chunking, multiprocessing | Pattern frequency, emotional density, manipulation cues | Interactive dashboard, graphs, CSV report | `/projects/regexia/input/speech_dataset.txt` | `/projects/regexia/output/analysis_report.csv` |
 
 ---
+## System Architecture Overview
+Regexia follows a modular and scalable architecture:
+
+1. **Input Layer**  
+   The user uploads a CSV which is parsed using Pandas.
+
+2. **Detection Layer**  
+   Regexia automatically identifies text-like columns.
+
+3. **Chunking Layer**  
+   Long text is broken into manageable chunks for efficient pattern scanning.
+
+4. **Pattern Engine**  
+   - Predefined patterns  
+   - JSON-based pattern packs  
+   - Visual regex builder  
+   All patterns are compiled into a unified rule set.
+
+5. **Processing Layer**  
+   Multiprocessing scans each chunk in parallel for maximum speed.
+
+6. **Scoring Engine**  
+   Each chunk receives a bias score based on detected patterns.
+
+7. **Output Layer**  
+   - Interactive graphs  
+   - Explainability with highlighted text  
+   - CSV output  
+   - SQLite storage  
+   - Full dashboard
+
+
+## System Architecture Diagram
+
+    A[User Uploads CSV File] --> B[Streamlit UI]
+
+    B --> C[Text Column Detection]
+    C --> D[Text Chunking Engine]
+
+    D --> E[Pattern Library Loader (JSON Packs)]
+    D --> F[Predefined Regex Rules]
+    D --> G[Visual Regex Builder]
+
+    E --> H[Final Rule Compiler]
+    F --> H
+    G --> H
+
+    H --> I[Parallel Processing Engine (Multiprocessing)]
+    I --> J[Pattern Scanning + Scoring]
+
+    J --> K[Results DataFrame]
+
+    K --> L[Visualisations (Graphs, Charts, Scores)]
+    K --> M[Explainability (Highlighted Text)]
+    K --> N[CSV Export]
+    K --> O[SQLite Database Storage]
+
+    L --> P[Streamlit Dashboard Output]
+    M --> P
+    N --> P
+    O --> P
+
+---
+---
 
 ## 🚀 Features
 
