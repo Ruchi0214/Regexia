@@ -103,36 +103,63 @@ Regexia follows a modular and scalable architecture:
 
 
 ## System Architecture Diagram
-
-    A[User Uploads CSV File] --> B[Streamlit UI]
-
-    B --> C[Text Column Detection]
-    C --> D[Text Chunking Engine]
-
-    D --> E[Pattern Library Loader (JSON Packs)]
-    D --> F[Predefined Regex Rules]
-    D --> G[Visual Regex Builder]
-
-    E --> H[Final Rule Compiler]
-    F --> H
-    G --> H
-
-    H --> I[Parallel Processing Engine (Multiprocessing)]
-    I --> J[Pattern Scanning + Scoring]
-
-    J --> K[Results DataFrame]
-
-    K --> L[Visualisations (Graphs, Charts, Scores)]
-    K --> M[Explainability (Highlighted Text)]
-    K --> N[CSV Export]
-    K --> O[SQLite Database Storage]
-
-    L --> P[Streamlit Dashboard Output]
-    M --> P
-    N --> P
-    O --> P
+<img width="1533" height="923" alt="image" src="https://github.com/user-attachments/assets/aaa6d060-7e05-459a-9fa7-9a87c501af81" />
 
 ---
+## Data Flow (CLI-Style ASCII Diagram)
++-------------------+
+|     User Input    |
+|  (Upload CSV)     |
++---------+---------+
+          |
+          v
++---------------------------+
+|  Streamlit UI Layer       |
+|  - Column detection       |
+|  - Rule selection         |
+|  - Regex builder          |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|   Text Chunking Engine    |
+|  (split into chunks)      |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|    Pattern Compiler       |
+|  - JSON pattern packs     |
+|  - Predefined rules       |
+|  - Custom rules           |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| Parallel Processing Core  |
+|  (multiprocessing scan)   |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| Matching & Scoring Engine |
+|  - Counts hits            |
+|  - Combines weights       |
+|  - Generates total score  |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|     Output Layer          |
+|  - Graphs & dashboards    |
+|  - Highlighted text       |
+|  - CSV report             |
+|  - SQLite backup          |
++---------------------------+
+              |
+              v
+        (User sees results)
+
 ---
 
 ## 🚀 Features
