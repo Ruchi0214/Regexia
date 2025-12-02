@@ -220,13 +220,13 @@ sudo systemctl enable regexia.service
 sudo systemctl start regexia.service
 
 ## 🧰 Installation (For Local System)
-git clone https://github.com/Ruchi0214/Regexia.git
+```git clone https://github.com/Ruchi0214/Regexia.git
 cd Regexia
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 streamlit run regexia_app.py
-
+```
 ## 📦 Requirements
 - streamlit
 - pandas
