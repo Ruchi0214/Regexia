@@ -188,7 +188,7 @@ Regexia is deployed using:
 ## ⚙️ Server Setup Commands (Copy & Paste)
 
 ```bash
-sudo apt update && sudo apt install -y python3-pip python3-venv nginx git
+.           
 git clone https://github.com/Ruchi0214/Regexia.git
 cd Regexia
 python3 -m venv venv
