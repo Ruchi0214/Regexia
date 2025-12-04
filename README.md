@@ -187,14 +187,16 @@ Regexia is deployed using:
 
 ## ⚙️ Server Setup Commands (Copy & Paste)
 
-```bash
-.           
+```bash         
 git clone https://github.com/Ruchi0214/Regexia.git
 cd Regexia
 python3 -m venv venv
-source venv/bin/activate
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\venv\Scripts\activate
 pip install -r requirements.txt
-streamlit run regexia_app.py --server.port=8501 --server.address=0.0.0.0
+python -m pip install --upgrade pip
+pip --version
+streamlit run regexia_app.py
 ```
 ## 🛠️ Systemd Auto-Restart Setup
 Create service file:
