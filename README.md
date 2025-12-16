@@ -44,16 +44,12 @@ Load multiple patterns such as:
 
 Researchers can contribute new libraries.
 
----
-
 ### 2. **Explainability View**
 Regexia highlights the exact words that triggered detection using `<mark>` colouring.
 
 Example:
 
 > The **<mark>crisis</mark>** is worsening because **<mark>they</mark>** are **<mark>corrupt</mark>**.
-
----
 
 ### 3. **Command-Line Mode (Simulated UI)**
 Users can preview commands like:
@@ -62,22 +58,18 @@ root@regexia:~$ system_ready... waiting_for_input
 ### 4. **Parallel Processing Engine**
 Regexia uses multiprocessing to scan **thousands of text chunks per second**, ensuring real-time performance.
 
----
-
 ### 5. **Interactive Visual Dashboard**
 Includes:
-
 - Score distribution histogram  
 - Rule hit frequency graphs  
 - Highest-scoring biased texts  
 - Highlighted explanations  
 - Downloadable CSV summaries  
 
----
-
 ### 6. **SQLite Database Support**
 Save results to a local database for long-term research or integration.
-
+---
+---
 ### **Key Technical Features**
 * **Architecture:** Decoupled Flask Backend (API) + Custom HTML5/CSS3 Frontend.
 * **Performance:** High-speed scanning using Python's `re` module and `Pandas` vectorization.
@@ -118,6 +110,7 @@ Regexia follows a modular Model-View-Controller (MVC) pattern:
 └── README.md              # Documentation
 ```
 ---
+## Deployment 
 ## 🚀 Getting Started (Local Setup)
 
 ### 1️⃣ Clone the Repository
@@ -163,3 +156,29 @@ gcloud run deploy regexia-app \
 ```
 ### 4️⃣ Link @ https://regexia-app-293799990245.us-central1.run.app/ 
 
+## Requirements 
+- Flask
+- pandas
+- numpy
+- plotly
+- gunicorn
+
+## 📊 Sample Output
+<img width="931" height="813" alt="image" src="https://github.com/user-attachments/assets/c2cb8400-7efe-4136-8ab1-66cadfb0ad00" />
+
+## Why Regexia Matters
+- Transparency
+- Explainability
+- Speed
+- Scalability
+- Open-source ethics
+It empowers journalists, researchers, analysts, and policy groups to understand how language shapes public opinion.
+
+## Final Notes
+It is a prototype of a real-time linguistic intelligence system that could evolve into:
+- A misinformation scanner
+- A political discourse analytics engine
+- A content authenticity verifier
+- A writer’s assistant for bias reduction
+
+# If you like this project, ⭐ star the repository!
