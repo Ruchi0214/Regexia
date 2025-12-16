@@ -70,3 +70,21 @@ Regexia follows a modular Model-View-Controller (MVC) pattern:
 │── requirements.txt       # Python dependencies
 └── README.md              # Documentation
 ```
+---
+
+## 🚀 Getting Started (Local Setup)
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/Ruchi0214/Regexia.git
+cd Regexia
+```
+### 2️⃣ Install Dependencies - Regexia requires Python 3.9+ and a few lightweight libraries (Flask, Pandas, Gunicorn).
+```
+pip install -r requirements.txt
+```
+### 3️⃣ Launch the Engine - Start the Flask development server.
+```
+python app.py
+```
+### 4️⃣ Access @ http://127.0.0.1:5000 
