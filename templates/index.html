@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regexia - Visual Intelligence</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CYBERPUNK THEME ENGINE --- */
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #050505;
+            --glass-bg: rgba(20, 25, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            /* Moving Grid Background */
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* GLASSMORPHISM CARDS */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        /* NEON BUTTON */
+        .btn-neon {
+            background: linear-gradient(90deg, #004d1a, #00802b);
+            border: 1px solid #00ff41;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+
+        .btn-neon:hover {
+            background: #00ff41;
+            color: black;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* CLI TYPING BOX */
+        .cli-box {
+            background: #000;
+            border-left: 4px solid var(--neon-green);
+            color: var(--neon-green);
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Cursor Blink */
+        .cursor::after {
+            content: '▋';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+
+        /* Custom Table */
+        th { background: rgba(0,0,0,0.8); color: var(--neon-green); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+        td { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        tr:hover td { background: rgba(0, 255, 65, 0.05); color: white; }
+
+        /* Highlight */
+        .highlight {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ffcccc;
+            padding: 0 4px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+        }
+        
+        /* Input Range */
+        input[type=range] { accent-color: var(--neon-green); }
+    </style>
+</head>
+<body class="p-4 md:p-8 max-w-7xl mx-auto min-h-screen flex flex-col">
+
+    <div class="flex items-center gap-4 mb-10 animate__animated animate__fadeInDown">
+        <div class="text-5xl filter drop-shadow-[0_0_10px_rgba(0,255,65,0.8)]">🧩</div>
+        <div>
+            <h1 class="text-4xl font-extrabold text-white tracking-tighter">
+    REGEXIA
+</h1>
+            <p class="text-gray-400 text-sm mono tracking-widest uppercase">Visual Pattern Intelligence System</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        
+        <div class="glass-card p-6 animate__animated animate__fadeInLeft">
+            <h3 class="text-xs font-bold text-[#00ff41] uppercase mb-4 tracking-widest">1. Ingest Data</h3>
+            <div class="relative group">
+                <input type="file" id="csvFile" accept=".csv" class="w-full bg-black/50 border border-gray-700 rounded p-3 text-sm focus:border-[#00ff41] focus:outline-none transition-colors text-gray-300 file:bg-[#00ff41] file:text-black file:border-0 file:font-bold file:px-4 file:py-1 file:rounded-sm file:mr-4 file:cursor-pointer hover:file:bg-white">
+            </div>
+            <select id="columnSelect" class="w-full mt-4 bg-black/50 border border-gray-700 rounded p-3 text-sm text-white hidden focus:border-[#00ff41] outline-none animate__animated animate__fadeIn"></select>
+        </div>
+
+        <div class="glass-card p-6 animate__animated animate__fadeInRight">
+            <h3 class="text-xs font-bold text-[#00ff41] uppercase mb-4 tracking-widest">2. Active Protocols</h3>
+            <div class="grid grid-cols-2 gap-3">
+                {% for rule in rules %}
+                <label class="flex items-center gap-3 cursor-pointer group p-2 rounded hover:bg-white/5 transition">
+                    <div class="relative flex items-center">
+                        <input type="checkbox" class="peer h-5 w-5 cursor-pointer appearance-none rounded-sm border border-gray-600 bg-black checked:border-[#00ff41] checked:bg-[#00ff41] transition-all rule-check" value="{{ rule }}" checked>
+                        <svg class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none opacity-0 peer-checked:opacity-100 text-black font-bold" viewBox="0 0 14 14" fill="none"><path d="M3 8L6 11L11 3.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <span class="text-sm text-gray-300 group-hover:text-white transition-colors">{{ rule }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="cli-box p-4 rounded mb-8 min-h-[60px] shadow-[0_0_15px_rgba(0,255,65,0.1)] animate__animated animate__fadeInUp">
+        <span id="cliText" class="cursor">root@regexia:~$ system_ready... waiting_for_input</span>
+    </div>
+
+    <button onclick="runScan()" class="btn-neon w-full py-4 rounded font-bold text-lg mb-12 animate__animated animate__fadeInUp animate__delay-1s group">
+        <span class="inline-block group-hover:animate-pulse">▶ INITIALIZE PATTERN SCAN</span>
+    </button>
+
+    <div id="resultsArea" class="hidden">
+        
+        <div class="glass-card p-6 mb-8 animate__animated animate__zoomIn">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <span class="w-2 h-8 bg-[#00ff41] rounded-sm"></span> 
+                    Analysis Data Stream
+                </h3>
+                <span class="text-xs mono text-[#00ff41] border border-[#00ff41] px-2 py-1 rounded">LIVE FEED</span>
+            </div>
+            <div class="overflow-x-auto max-h-[450px] custom-scrollbar rounded-lg border border-gray-800">
+                <table id="mainTable" class="w-full text-left border-collapse"></table>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="glass-card p-6 animate__animated animate__fadeInLeft animate__delay-1s">
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-widest">Risk Distribution</h3>
+                <div id="chartHist" class="h-64"></div>
+            </div>
+            <div class="glass-card p-6 animate__animated animate__fadeInRight animate__delay-1s">
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-widest">Trigger Frequency</h3>
+                <div id="chartBar" class="h-64"></div>
+            </div>
+        </div>
+
+        <div class="glass-card p-6 mb-8 animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                <h3 class="text-xl font-bold text-white">🔥 Deep Dive (Explainability)</h3>
+                <div class="flex items-center gap-4 bg-black/40 px-4 py-2 rounded-full border border-gray-700">
+                    <span class="text-xs text-gray-400 uppercase">View Top: <span id="sliderVal" class="text-[#00ff41] font-bold text-base">5</span></span>
+                    <input type="range" id="slider" min="1" max="50" value="5" class="w-32 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer" oninput="updateExplain()">
+                </div>
+            </div>
+            <div id="explainBox" class="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 animate__animated animate__fadeInUp animate__delay-3s">
+            <button onclick="downloadCSV()" class="glass-card py-4 text-gray-300 font-bold hover:bg-white/10 hover:text-white transition flex justify-center items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Download Report
+            </button>
+            <button id="btnSave" onclick="saveDB()" class="glass-card py-4 text-[#00ff41] font-bold hover:bg-[#00ff41]/10 transition flex justify-center items-center gap-2 border-[#00ff41]/30">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                Save to Database
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let tableData = [], explainData = [];
+
+        // --- TYPING EFFECT FUNCTION ---
+        function typeWriter(text, elementId, speed = 30) {
+            let i = 0;
+            const target = document.getElementById(elementId);
+            target.innerHTML = "root@regexia:~$ "; 
+            function type() {
+                if (i < text.length) {
+                    target.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // 1. Upload & Col Detection
+        document.getElementById('csvFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const headers = e.target.result.split('\n')[0].split(',');
+                const sel = document.getElementById('columnSelect');
+                sel.innerHTML = '';
+                sel.classList.remove('hidden');
+                let def = 0;
+                headers.forEach((h, i) => {
+                    const opt = document.createElement('option');
+                    opt.value = h.trim(); opt.text = h.trim();
+                    if(['text','content','article_text'].includes(h.toLowerCase())) def = i;
+                    sel.appendChild(opt);
+                });
+                sel.selectedIndex = def;
+                // Trigger typing effect
+                typeWriter(`file_mounted: ${file.name} [Size: ${(file.size/1024).toFixed(1)}KB]`, 'cliText');
+            };
+            reader.readAsText(file);
+        });
+
+        // 2. Scan Logic
+        async function runScan() {
+            const file = document.getElementById('csvFile').files[0];
+            if(!file) { alert("ERROR: No Data Stream Found."); return; }
+            
+            typeWriter("initiating_core_sequences... optimizing_threads... scanning_chunks...", 'cliText', 20);
+            
+            const fd = new FormData();
+            fd.append('file', file);
+            fd.append('column', document.getElementById('columnSelect').value);
+            const rules = Array.from(document.querySelectorAll('.rule-check:checked')).map(c => c.value);
+            fd.append('rules', JSON.stringify(rules));
+
+            try {
+                const res = await fetch('/analyze', { method: 'POST', body: fd });
+                const data = await res.json();
+                
+                if(data.error) throw new Error(data.error);
+
+                tableData = data.table_data;
+                explainData = data.explain_data;
+
+                renderTable(tableData, data.active_rules);
+                renderCharts(data);
+                updateExplain();
+                
+                document.getElementById('resultsArea').classList.remove('hidden');
+                
+                // Scroll smoothly
+                setTimeout(() => {
+                    document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth' });
+                    typeWriter(`scan_complete: ${data.total_rows} records processed successfully.`, 'cliText');
+                }, 500);
+
+            } catch(e) {
+                typeWriter(`CRITICAL_ERROR: ${e.message}`, 'cliText');
+                alert(e.message);
+            }
+        }
+
+        function renderTable(rows, rules) {
+            const tbl = document.getElementById('mainTable');
+            let html = `<thead><tr class="border-b border-gray-700 text-gray-400"><th class="p-3">ID</th><th class="p-3">CONTENT PREVIEW</th>`;
+            rules.forEach(r => html += `<th class="p-3 text-center">${r}</th>`);
+            html += `<th class="p-3 text-center text-white">SCORE</th></tr></thead><tbody>`;
+
+            rows.forEach((row, idx) => {
+                // Add staggered animation delay
+                html += `<tr class="border-b border-gray-800 hover:bg-white/5 transition animate__animated animate__fadeIn" style="animation-delay: ${idx * 0.02}s">
+                    <td class="p-3 mono text-gray-500 text-xs">${row.id}</td>
+                    <td class="p-3 text-gray-300 text-xs font-light">${row.text}</td>`;
+                rules.forEach(r => {
+                    const val = row.matches[r] || 0;
+                    const style = val > 0 ? "text-[#00ff41] font-bold" : "text-gray-700 opacity-30";
+                    html += `<td class="p-3 text-center ${style}">${val}</td>`;
+                });
+                html += `<td class="p-3 text-center font-bold text-white bg-white/5 border-l border-gray-800">${row.score}</td></tr>`;
+            });
+            html += `</tbody>`;
+            tbl.innerHTML = html;
+        }
+
+        function updateExplain() {
+            const n = document.getElementById('slider').value;
+            document.getElementById('sliderVal').innerText = n;
+            const box = document.getElementById('explainBox');
+            box.innerHTML = '';
+            
+            explainData.slice(0, n).forEach((item, idx) => {
+                box.innerHTML += `
+                    <div class="glass-card p-5 mb-4 animate__animated animate__fadeInUp" style="animation-delay: ${idx * 0.1}s">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="mono text-xs text-gray-500">Row ID: ${item.id}</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-gray-400">Risk Level</span>
+                                <div class="w-24 h-2 bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-yellow-500 to-red-600" style="width: ${Math.min(item.score * 10, 100)}%"></div>
+                                </div>
+                                <span class="text-[#00ff41] font-bold text-sm ml-2">${item.score}</span>
+                            </div>
+                        </div>
+                        <div class="mono text-sm leading-7 text-gray-300 bg-black/30 p-4 rounded border-l-2 border-red-500">${item.full_text}</div>
+                    </div>`;
+            });
+        }
+
+        function renderCharts(data) {
+            Plotly.newPlot('chartHist', [{ x: tableData.map(d=>d.score), type: 'histogram', marker: {color:'#00ff41', opacity: 0.7} }], 
+                { paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)', font:{color:'#9ca3af'}, margin:{t:10,l:30,r:10,b:30} });
+            Plotly.newPlot('chartBar', [{ x: Object.keys(data.rule_counts), y: Object.values(data.rule_counts), type: 'bar', marker: {color:'#0ea5e9', opacity: 0.8} }], 
+                { paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)', font:{color:'#9ca3af'}, margin:{t:10,l:30,r:10,b:60} });
+        }
+
+        function downloadCSV() {
+            const csv = "id,score,text\n" + tableData.map(r => `${r.id},${r.score},"${r.text.replace(/"/g,'""')}"`).join('\n');
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+            a.download = 'regexia_report_v3.csv'; a.click();
+        }
+
+        async function saveDB() {
+            const btn = document.getElementById('btnSave');
+            btn.innerHTML = `<span class="animate-spin">↻</span> Saving...`;
+            try {
+                await fetch('/save_db', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({data: tableData}) });
+                btn.innerHTML = `✔ Saved Successfully`;
+                setTimeout(() => btn.innerHTML = `Save to Database`, 2000);
+            } catch(e) { btn.innerHTML = `❌ Error`; }
+        }
+    </script>
+</body>
+</html>

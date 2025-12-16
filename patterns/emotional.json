@@ -1,0 +1,1 @@
+{ "name": "Emotional Patterns", "patterns": ["\\b(crisis|danger|fear|panic|threat)\\b","\\b(emergency|disaster|catastrophe)\\b"] } 
