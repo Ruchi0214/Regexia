@@ -32,6 +32,52 @@ Regexia provides a transparent, regex-driven linguistic scanning engine that det
 * ⚔️ **Attack Vectors:** Ad hominem and aggressive language.
 * 📢 **Exaggeration:** Hyperbolic phrases and absolute terms.
 
+### **Core Features**
+### 1. **Pattern Library (JSON Rule Packs)**
+Load multiple patterns such as:
+- Political rhetoric  
+- Emotional intensity words  
+- Logical fallacies  
+- Corporate influence patterns  
+- Climate discourse framing  
+…and more.
+
+Researchers can contribute new libraries.
+
+---
+
+### 2. **Explainability View**
+Regexia highlights the exact words that triggered detection using `<mark>` colouring.
+
+Example:
+
+> The **<mark>crisis</mark>** is worsening because **<mark>they</mark>** are **<mark>corrupt</mark>**.
+
+---
+
+### 3. **Command-Line Mode (Simulated UI)**
+Users can preview commands like:
+root@regexia:~$ system_ready... waiting_for_input
+
+### 4. **Parallel Processing Engine**
+Regexia uses multiprocessing to scan **thousands of text chunks per second**, ensuring real-time performance.
+
+---
+
+### 5. **Interactive Visual Dashboard**
+Includes:
+
+- Score distribution histogram  
+- Rule hit frequency graphs  
+- Highest-scoring biased texts  
+- Highlighted explanations  
+- Downloadable CSV summaries  
+
+---
+
+### 6. **SQLite Database Support**
+Save results to a local database for long-term research or integration.
+
 ### **Key Technical Features**
 * **Architecture:** Decoupled Flask Backend (API) + Custom HTML5/CSS3 Frontend.
 * **Performance:** High-speed scanning using Python's `re` module and `Pandas` vectorization.
