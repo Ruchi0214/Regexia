@@ -71,7 +71,6 @@ Regexia follows a modular Model-View-Controller (MVC) pattern:
 └── README.md              # Documentation
 ```
 ---
-
 ## 🚀 Getting Started (Local Setup)
 
 ### 1️⃣ Clone the Repository
@@ -88,3 +87,32 @@ pip install -r requirements.txt
 python app.py
 ```
 ### 4️⃣ Access @ http://127.0.0.1:5000 
+
+---
+---
+## ☁️ Global Deployment - Google Cloud Compute Engine
+### 1️⃣ Prepare the Environment
+```
+git clone [https://github.com/Ruchi0214/Regexia.git](https://github.com/Ruchi0214/Regexia.git)
+cd Regexia
+```
+### 2️⃣ Service Configuration
+```
+gcloud services enable artifactregistry.googleapis.com \
+    cloudbuild.googleapis.com \
+    run.googleapis.com
+```
+### 3️⃣ Production Deployment
+--source . : Builds from the current directory.
+--platform managed : Uses the fully managed Cloud Run platform.
+--allow-unauthenticated : Makes the web app publicly accessible.
+--region us-central1 : Deploys to the Iowa data center for low latency.
+```
+gcloud run deploy regexia-app \
+    --source . \
+    --platform managed \
+    --region us-central1 \
+    --allow-unauthenticated
+```
+### 4️⃣ Link @ https://regexia-app-293799990245.us-central1.run.app/ 
+
