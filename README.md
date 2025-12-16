@@ -53,6 +53,7 @@ Regexia follows a modular Model-View-Controller (MVC) pattern:
     * Data is returned as JSON.
     * Vanilla JavaScript renders interactive tables and Plotly.js charts.
     * CSS Grid provides a responsive, modern experience.
+<img width="1809" height="500" alt="image" src="https://github.com/user-attachments/assets/5a0a4dc6-ca8c-4942-8d96-85d29fc88085" />
 
 ### **Project Structure**
 ```bash
